@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PDF Formatter</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+			font-size: 14px;
+			color: #333;
+		}
+		header {
+			background-color: #44526c;
+			color: #fff;
+			padding: 10px;
+			text-align: center;
+			font-weight: bold;
+			font-size: 28px;
+			text-shadow: 2px 2px #333;
+			box-shadow: 0px 2px 2px rgba(0,0,0,0.3);
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			z-index: 999;
+		}
+		nav {
+			background-color: #fff;
+			padding: 10px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			box-shadow: 0px 2px 2px rgba(0,0,0,0.3);
+		}
+		nav a {
+			display: inline-block;
+			margin: 0 10px;
+			padding: 5px 10px;
+			color: #44526c;
+			text-decoration: none;
+			border-radius: 5px;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			box-shadow: 0px 2px 2px rgba(0,0,0,0.1);
+			transition: all 0.2s ease-in-out;
+		}
+		nav a:hover {
+			background-color: #44526c;
+			color: #fff;
+			border: 1px solid #44526c;
+			box-shadow: 0px 2px 2px rgba(0,0,0,0.3);
+			transition: all 0.2s ease-in-out;
+		}
+		#pdf-viewer {
+			margin: 70px 10px 10px 10px;
+			padding: 10px;
+			background-color: #f5f5f5;
+			box-shadow: 0 0 5px rgba(0,0,0,0.3);
+			min-height: 500px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+		}
+		#pdf-viewer h2 {
+			color: #555;
+			font-weight: bold;
+			font-size: 20px;
+			margin-top: 30px;
+		}
+		#pdf-pages {
+			display: flex;
+			flex-wrap: wrap;
+			margin: 10px;
+		}
+		.pdf-page {
+			width: 100px;
+			height: 120px;
+			margin: 5px;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 16px;
+			font-weight: bold;
+			box-shadow: 0px 2px 2px rgba(0,0,0,0.1);
+			cursor: pointer;
+			transition: all 0.2s ease-in-out;
+		}
+		.pdf-page:hover {
+			background-color: #f5f5f5;
+			color: #555
+			box-shadow: 0px 2px 2px rgba(0,0,0,0.3);
+			transition: all 0.2s ease-in-out;
+		}
+		.pdf-page.active {
+			background-color: #44526c;
+			color: #fff;
+			border: 1px solid #44526c;
+			box-shadow: 0px 2px 2px rgba(0,0,0,0.3);
+			transition: all 0.2s ease-in-out;
+		}
+		.pdf-page:not(.active):hover {
+			background-color: #f5f5f5;
+			color: #555;
+			box-shadow: 0px 2px 2px rgba(0,0,0,0.3);
+			transition: all 0.2s ease-in-out;
+		}
+		#pdf-controls {
+			margin: 20px 10px;
+			padding: 10px;
+			background-color: #f5f5f5;
+			box-shadow: 0 0 5px rgba(0,0,0,0.3);
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+		}
+		.pdf-control {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin: 10px;
+			cursor: pointer;
+			transition: all 0.2s ease-in-out;
+		}
+		.pdf-control:hover {
+			transform: scale(1.05);
+			box-shadow: 0px 2px 2px rgba(0,0,0,0.3);
+			transition: all 0.2s ease-in-out;
+		}
+		.pdf-control img {
+			width: 50px;
+			height: 50px;
+			margin-bottom: 5px;
+		}
+		.pdf-control p {
+			margin: 0;
+			font-weight: bold;
+			font-size: 12px;
+			color: #333;
+			text-align: center;
+		}
+		.pdf-control input {
+			display: none;
+		}
+		.pdf-control label {
+			display: inline-block;
+			margin: 10px;
+			padding: 5px 10px;
+			color: #fff;
+			background-color: #44526c;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: all 0.2s ease-in-out;
+		}
+		.pdf-control label:hover {
+			background-color: #30405c;
+			transition: all 0.2s ease-in-out;
+		}
+		.pdf-control button {
+			margin-top: 5px;
+			padding: 5px 10px;
+			color: #fff;
+			background-color: #44526c;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: all 0.2s ease-in-out;
+		}
+		.pdf-control button:hover {
+			background-color: #30405c;
+			transition: all 0.2s ease-in-out;
+		}
+	</style>
+	</head>
+		<body>
+			<header>PDF Formatter</header>
+			<nav>
+				<a href="#">Home</a>
+				<a href="#">About</a>
+				<a href="#">Contact</a>
+			</nav>
+			<div id="pdf-viewer">
+				<h2>PDF Document</h2>
+				<div id="pdf-pages">
+					<div class="pdf-page active">
+
+1</div>
+<div class="pdf-page">2</div>
+<div class="pdf-page">3</div>
+<div class="pdf-page">4</div>
+<div class="pdf-page">5</div>
+<div class="pdf-page">6</div>
+<div class="pdf-page">7</div>
+<div class="pdf-page">8</div>
+<div class="pdf-page">9</div>
+<div class="pdf-page">10</div>
+</div>
+</div>
+<div id="pdf-controls">
+<div class="pdf-control">
+<img src="https://img.icons8.com/ios-filled/50/ffffff/upload.png"/>
+<p>Upload PDF</p>
+<input type="file"/>
+</div>
+<div class="pdf-control">
+<label>Split Pages</label>
+<button>Split</button>
+</div>
+<div class="pdf-control">
+<label>Delete Pages</label>
+<button>Delete</button>
+</div>
+<div class="pdf-control">
+<label>Download PDF</label>
+<button>Download</button>
+</div>
+</div>
+
+</body>
+</html>
