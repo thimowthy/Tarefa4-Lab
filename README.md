@@ -5,7 +5,7 @@
 ### Dannilo de Souza Costa
 ### 202000012669
 ### PDFormat - Uma aplicação de edição e formatação de arquivos texto e pdf
-### ---------------------------------------------------------------------------------------------------------------------------
+### -------------------------------------------------------------------------------------------------------
 
 #### Como disponibilizar uma página HTML num container Docker no Laboratório Elan?
 
